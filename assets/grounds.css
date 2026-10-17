@@ -1,0 +1,152 @@
+/* =====================================================================
+   Cruising Grounds page · direction A (Navy & Brass)
+   Loaded after site.css (a copy of design/a.css). Uses only the .dir-a
+   tokens defined there; colours come from tokens so light and dark both
+   work. Layout responds to the .site container (as a.css does); each
+   chart figure is its own container so labels thin out on small charts.
+   Generated markup: tools/grounds.py
+   ===================================================================== */
+
+.dir-a .cg-wrap { max-width: 1180px; margin-inline: auto; }
+
+/* ---------- hero (navy band) ---------- */
+.dir-a .cg-hero { background: var(--navy); color: var(--on-navy); padding: var(--space-7) var(--gutter); }
+.dir-a .cg-hero .cg-wrap { display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-4); }
+.dir-a .cg-hero .eyebrow { order: -1; }                  /* reads above the h1; h1 stays first in the DOM */
+.dir-a .cg-title { font: 300 var(--fs-display)/var(--lh-tight) var(--font-display); letter-spacing: -.01em; }
+.dir-a .cg-tag { font: 300 clamp(1.375rem, 2.6cqi, 1.875rem)/1.2 var(--font-display); color: var(--on-navy-muted); margin-top: calc(var(--space-2) * -1); }
+.dir-a .cg-rule { width: 56px; height: 1px; background: var(--brass); border: 0; margin: var(--space-1) 0; }
+.dir-a .cg-lede { font: 300 var(--fs-md)/1.5 var(--font-body); max-width: 48ch; }
+.dir-a .cg-figs {
+  align-self: stretch; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-4) var(--space-5);
+  margin-top: var(--space-4); padding-top: var(--space-5); border-top: 1px solid color-mix(in srgb, var(--brass) 35%, transparent);
+}
+.dir-a .cg-figs li { display: grid; gap: 2px; align-content: start; }
+.dir-a .cg-figs b { font: 400 var(--fs-xl)/1 var(--font-display); color: var(--on-navy); font-variant-numeric: tabular-nums; }
+.dir-a .cg-figs b small { font-size: var(--fs-sm); font-weight: 300; margin-left: 4px; }
+.dir-a .cg-figs span { font: 400 var(--fs-xs)/1.35 var(--font-body); letter-spacing: .06em; text-transform: uppercase; color: var(--on-navy-muted); }
+.dir-a .cg-range { font: 400 var(--fs-xs)/1.5 var(--font-mono); color: var(--on-navy-muted); }
+
+/* ---------- chart frames ---------- */
+.dir-a .cg-chart { container-type: inline-size; border: 1px solid var(--heading); padding: 3px; background: var(--bg); min-width: 0; }
+.dir-a .cg-chart svg { display: block; width: 100%; height: auto; outline: 1px solid var(--rule); }
+.dir-a .cg-chart figcaption { font: 400 var(--fs-xs)/1.4 var(--font-body); color: var(--muted); padding: 6px 2px 2px; }
+
+/* place markers: harbor = solid navy, beach = solid brass, point of interest = open ring */
+.dir-a .cg-map .mk .m { stroke: var(--map-dot-edge); stroke-width: 1.4; }
+.dir-a .cg-map .mk.k-harbor .m { fill: var(--map-label); }
+.dir-a .cg-map .mk.k-beach .m { fill: var(--brass); }
+.dir-a .cg-map .mk.k-poi .m { fill: var(--bg); stroke: var(--map-label); stroke-width: 1.8; }
+.dir-a .cg-map .mk text { font: 600 10.5px var(--font-mono); pointer-events: none; }
+.dir-a .cg-map .mk.k-harbor text { fill: var(--bg); }
+.dir-a .cg-map .mk.k-beach text { fill: var(--navy); }
+.dir-a .cg-map .mk.k-poi text { fill: var(--map-label); }
+.dir-a .cg-map .mk .lead { stroke: var(--map-label); stroke-width: .8; opacity: .6; }
+.dir-a .cg-map .mk .dot { fill: var(--map-label); stroke: none; }
+.dir-a .cg-map .mk.on .m { stroke: var(--brass-ink); stroke-width: 3; }
+.dir-a .cg-map .inset { fill: none; stroke: var(--brass-ink); stroke-width: 1.3; stroke-dasharray: 5 3; }
+.dir-a .cg-map .inset-l { font: 500 14px var(--font-display); fill: var(--brass-ink); }
+.dir-a .cg-map .inset-s { font: 400 10px var(--font-mono); fill: var(--map-grid-label); }
+
+/* small charts: drop the labels that would shrink below ~7px; dots and tracks stay */
+@container (max-width: 560px) {
+  .dir-a .cg-chart.is-wide :is(.mk text, .gl, .scale, .cg-numbered) { display: none; }
+}
+@container (max-width: 430px) {
+  .dir-a .cg-chart.is-tall :is(.mk text, .gl, .scale, .cg-numbered) { display: none; }
+  .dir-a .cg-chart.is-ov .map .ovl { font-size: 19px; stroke-width: 5px; }
+  .dir-a .cg-chart.is-ov .map .gl { display: none; }
+}
+
+/* ---------- overview + region index ---------- */
+.dir-a .cg-ov-grid { display: grid; gap: var(--space-6); align-items: start; }
+.dir-a .cg-ov-side { display: grid; gap: var(--space-5); min-width: 0; }
+.dir-a .cg-ov-side .section-head { margin-bottom: 0; }
+.dir-a .cg-nav li { border-bottom: 1px solid var(--rule); }
+.dir-a .cg-nav li:first-child { border-top: 1px solid var(--rule); }
+.dir-a .cg-nav a {
+  display: grid; grid-template-columns: 2.25rem minmax(0, 1fr); gap: 2px var(--space-3);
+  min-height: 44px; padding: var(--space-3) 0; text-decoration: none;
+}
+.dir-a .cg-nav a:hover .r-name { color: var(--brass-ink); }
+.dir-a .cg-nav .r-n { grid-row: span 2; }
+
+.dir-a .cg-legend { display: flex; flex-wrap: wrap; gap: var(--space-2) var(--space-5); font: 400 var(--fs-sm)/1.4 var(--font-body); color: var(--muted); }
+.dir-a .cg-legend li { display: inline-flex; align-items: center; gap: var(--space-2); }
+.dir-a .cg-sw { width: 14px; height: 14px; border-radius: 50%; display: inline-block; flex: none; }
+.dir-a .cg-ln { width: 22px; height: 0; border-top: 2px solid var(--map-track); display: inline-block; flex: none; }
+
+/* kind swatches shared by legend, chips and list keys */
+.dir-a :is(.cg-sw, .cg-key).k-harbor, .dir-a .cg-chip.k-harbor i { background: var(--map-label); color: var(--bg); }
+.dir-a :is(.cg-sw, .cg-key).k-beach, .dir-a .cg-chip.k-beach i { background: var(--brass); color: var(--navy); }
+.dir-a :is(.cg-sw, .cg-key).k-poi, .dir-a .cg-chip.k-poi i { background: var(--bg); color: var(--map-label); box-shadow: inset 0 0 0 1.6px var(--map-label); }
+
+/* ---------- the year on the water ---------- */
+.dir-a .cg-seasons { display: grid; gap: 0; }
+.dir-a .cg-seasons li { position: relative; padding: 0 0 var(--space-5) var(--space-5); border-left: 1px solid var(--brass); min-width: 0; }
+.dir-a .cg-seasons li:last-child { padding-bottom: 0; }
+.dir-a .cg-seasons li::before { content: ""; position: absolute; left: -5px; top: .35em; width: 9px; height: 9px; background: var(--brass); transform: rotate(45deg); }
+.dir-a .cg-season { font: 400 var(--fs-sm)/1.4 var(--font-mono); color: var(--muted); margin-bottom: 4px; }
+.dir-a .cg-season span { display: block; font: 500 var(--fs-xs)/1.5 var(--font-body); letter-spacing: var(--track-caps); text-transform: uppercase; color: var(--brass-ink); }
+.dir-a .cg-seasons h3 { font: 500 var(--fs-md)/1.25 var(--font-display); color: var(--heading); margin-bottom: 6px; }
+.dir-a .cg-seasons p:not(.cg-season) { font: 400 var(--fs-sm)/1.5 var(--font-body); color: var(--muted); }
+
+/* ---------- regions ---------- */
+.dir-a .cg-region { scroll-margin-top: var(--space-4); }
+.dir-a .cg-rhead { display: grid; gap: var(--space-3); max-width: 46rem; margin-bottom: var(--space-6); }
+.dir-a .cg-rhead .section-title { margin-top: calc(var(--space-1) * -1); }
+.dir-a .cg-sub { font: 400 var(--fs-sm)/1.45 var(--font-body); letter-spacing: .04em; color: var(--muted); }
+.dir-a .cg-meta { display: flex; flex-wrap: wrap; gap: 6px var(--space-4); font: 400 var(--fs-sm)/1.5 var(--font-body); color: var(--muted); }
+.dir-a .cg-when { color: var(--ink); font-weight: 500; }
+.dir-a .cg-chip { display: inline-flex; align-items: center; gap: 6px; }
+.dir-a .cg-chip i { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+.dir-a .cg-blurb { font: 300 var(--fs-base)/1.55 var(--font-body); max-width: 44em; }
+.dir-a .cg-lk { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; font: 400 var(--fs-sm)/1.5 var(--font-body); color: var(--muted); }
+.dir-a .cg-lk span { font: 500 var(--fs-xs)/1.6 var(--font-body); letter-spacing: .12em; text-transform: uppercase; color: var(--brass-ink); border: 1px solid var(--brass); padding: 0 6px; border-radius: var(--radius-sm); }
+
+.dir-a .cg-rbody { display: grid; gap: var(--space-6); }
+.dir-a .cg-charts { display: grid; gap: var(--space-5); min-width: 0; align-content: start; }
+.dir-a .cg-places { display: grid; gap: var(--space-5) var(--space-6); min-width: 0; align-items: start; }
+.dir-a .cg-grp h3 {
+  font: 500 var(--fs-xs)/1.3 var(--font-body); letter-spacing: .14em; text-transform: uppercase; color: var(--brass-ink);
+  padding-bottom: var(--space-2); border-bottom: 1px solid var(--heading);
+}
+.dir-a .cg-grp li { display: grid; grid-template-columns: 24px minmax(0, 1fr); gap: var(--space-3); padding: var(--space-3) 4px var(--space-3) 0; border-bottom: 1px solid var(--rule); transition: background-color .15s; }
+.dir-a .cg-grp li.on { background: color-mix(in srgb, var(--brass) 14%, transparent); }
+.dir-a .cg-key { width: 24px; height: 24px; border-radius: 50%; display: grid; place-items: center; font: 600 11px/1 var(--font-mono); margin-top: 1px; }
+.dir-a .cg-pl { display: grid; gap: 2px; min-width: 0; }
+.dir-a .cg-pl-h { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0 var(--space-3); }
+.dir-a .cg-pl-h b { font: 500 var(--fs-base)/1.35 var(--font-display); color: var(--heading); }
+.dir-a .cg-pos { font: 400 var(--fs-xs)/1.4 var(--font-mono); color: var(--muted); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.dir-a .cg-note { font: 400 var(--fs-sm)/1.5 var(--font-body); color: var(--muted); }
+
+/* ---------- notes ---------- */
+.dir-a .cg-foot { border-top: 1px solid var(--rule); }
+.dir-a .cg-foot .cg-wrap { display: grid; gap: var(--space-2); font: 400 var(--fs-sm)/1.55 var(--font-body); color: var(--muted); }
+.dir-a .cg-foot .cg-legend { margin-bottom: var(--space-3); }
+
+/* ---------- wider layouts ---------- */
+@container site (min-width: 640px) {
+  .dir-a .cg-blurb { font-size: var(--fs-md); line-height: 1.5; }
+  .dir-a .cg-figs { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .dir-a .cg-figs li + li { border-left: 1px solid color-mix(in srgb, var(--brass) 25%, transparent); padding-left: var(--space-4); }
+  .dir-a .cg-seasons { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-6) var(--space-5); }
+  .dir-a .cg-seasons li, .dir-a .cg-seasons li:last-child { border-left: 0; border-top: 1px solid var(--brass); padding: var(--space-5) var(--space-4) 0 0; }
+  .dir-a .cg-seasons li::before { left: 0; top: -5px; }
+  .dir-a .cg-wide .cg-places { grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr)); }
+}
+@container site (min-width: 900px) {
+  .dir-a .cg-ov-grid { grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); gap: var(--space-8); }
+  .dir-a .cg-seasons { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .dir-a .cg-tall .cg-rbody { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: start; gap: var(--space-7); }
+  .dir-a .cg-tall .cg-charts { position: sticky; top: var(--space-4); }
+  .dir-a .cg-xtall .cg-charts { position: static; }
+}
+@container site (min-width: 1200px) {
+  .dir-a .cg-seasons { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+}
+@media (prefers-reduced-motion: reduce) { .dir-a .cg-grp li { transition: none; } }
+@media print {
+  .dir-a .cg-tall .cg-charts { position: static; }
+  .dir-a .cg-region { break-inside: avoid-page; }
+}
