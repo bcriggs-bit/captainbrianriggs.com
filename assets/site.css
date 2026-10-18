@@ -433,3 +433,14 @@ html.dir-a { background: var(--bg); -webkit-text-size-adjust: 100%; text-size-ad
 .dir-a .about-more summary:hover { color: var(--brass-ink); }
 .dir-a .about-more summary:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }
 .dir-a .about-more-body { display: grid; gap: var(--space-4); padding-top: var(--space-5); font: 300 var(--fs-base)/1.6 var(--font-body); color: var(--ink); }
+
+/* ---------- refit & yard management ---------- */
+.dir-a .refit-steps { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-4); grid-template-columns: 1fr; counter-reset: none; }
+@media (min-width: 760px) { .dir-a .refit-steps { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-5); } }
+.dir-a .refit-step { display: grid; align-content: start; gap: var(--space-2); padding: var(--space-5); background: var(--bg); border: 1px solid var(--rule); border-top: 3px solid var(--navy); border-radius: var(--radius); }
+.dir-a .refit-step.upcoming { border-top-color: var(--brass); }
+.dir-a .refit-when { display: flex; align-items: baseline; gap: 10px; font: 500 var(--fs-xs)/1.3 var(--font-body); letter-spacing: .12em; text-transform: uppercase; color: var(--brass-ink); }
+.dir-a .refit-n { font: 500 var(--fs-xs)/1 var(--font-mono); color: var(--muted); letter-spacing: 0; }
+.dir-a .refit-title { margin: 0; font: 500 var(--fs-md)/1.25 var(--font-display); color: var(--heading); }
+.dir-a .refit-step p:last-child { margin: 0; font: 300 var(--fs-base)/1.55 var(--font-body); color: var(--ink); }
+.dir-a .refit-steps + .grounds-more { margin-top: var(--space-5); }
