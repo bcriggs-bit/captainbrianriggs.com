@@ -167,8 +167,8 @@ html.dir-a { background: var(--bg); -webkit-text-size-adjust: 100%; text-size-ad
 }
 .dir-a .brand { font: 500 var(--fs-sm)/1 var(--font-display); letter-spacing: .24em; text-transform: uppercase; text-decoration: none; display: inline-flex; align-items: center; min-height: 44px; justify-self: start; }
 .dir-a .nav-links {
-  grid-column: 1 / -1; grid-row: 2; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0 var(--space-3);
-  font: 400 var(--fs-sm)/1 var(--font-body); letter-spacing: .04em; color: var(--on-navy-muted);
+  grid-column: 1 / -1; grid-row: 2; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0 var(--space-2);
+  font: 400 var(--fs-sm)/1 var(--font-body); letter-spacing: .01em; color: var(--on-navy-muted);
 }
 .dir-a .nav-links a { display: inline-flex; align-items: center; min-height: 44px; text-decoration: none; border-bottom: 1px solid transparent; }
 .dir-a .nav-links a:hover, .dir-a .nav-links [aria-current] { color: var(--on-navy); }
@@ -357,7 +357,7 @@ html.dir-a { background: var(--bg); -webkit-text-size-adjust: 100%; text-size-ad
 /* ---------- wider screens ---------- */
 @media (min-width: 760px) { .dir-a { --gutter: 40px; } }
 @container site (min-width: 520px) {
-  .dir-a .nav-links { justify-content: flex-start; gap: 0 var(--space-6); }
+  .dir-a .nav-links { justify-content: flex-start; gap: 0 var(--space-6); letter-spacing: .04em; }
 }
 @container site (min-width: 720px) {
   .dir-a .grounds-grid { grid-template-columns: minmax(0, 400px) minmax(0, 1fr); gap: var(--space-8); }
